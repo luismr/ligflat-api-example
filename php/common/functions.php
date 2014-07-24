@@ -33,6 +33,25 @@ function generateToken() {
 	return $response;
 }
 
+/* 
+ * Create a Callback 
+ * $token must match $from
+ */
+function createCallback($tokenId, $from, $to) {
+	$http = new RestCurlClient();
+
+	$params = array(
+			"tokenId" => $tokenId,
+			"from" => $from,
+			"to" => $to
+		);
+
+	$response = $http->post("https://api.ligflat.com.br/talkalot/interfaces/rest/callback/create", $params, getCurlOptions());
+	$response = json_decode($response, true);
+
+	return $response;	
+}
+
 /*
  * Send a SMS
  */
